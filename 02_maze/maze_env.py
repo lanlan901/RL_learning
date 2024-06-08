@@ -4,8 +4,8 @@ import sys
 import tkinter as tk
 
 UNIT = 40       # pixels
-MAZE_H = 8      # grid height
-MAZE_W = 8      # grid width
+MAZE_H = 5      # grid height
+MAZE_W = 5      # grid width
 
 class Maze(tk.Tk, object):
     def __init__(self):
