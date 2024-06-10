@@ -57,6 +57,7 @@ class DeepQNetwork():
         self.q_target = Net(self.n_features, self.n_hidden, self.n_actions)
         self.optimizer = torch.optim.RMSprop(self.q_eval.parameters(), lr=self.lr)
 
+    # regularly update the parameters of the target network
     def store_transition(self, s, a, r, s_):
         if not hasattr(self, 'memory_counter'):
             self.memory_counter = 0
@@ -103,6 +104,7 @@ class DeepQNetwork():
         reward = torch.Tensor(batch_memory[:, self.n_features + 1])
         q_target[batch_index, eval_act_index] = reward + self.gamma * torch.max(q_next, 1)[0]
 
+        # optimize
         loss = self.loss_func(q_eval, q_target)
         self.optimizer.zero_grad()
         loss.backward()
